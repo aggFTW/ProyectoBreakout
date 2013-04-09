@@ -347,11 +347,13 @@ static void display(void)
     
     // Draw left paddle
     changeMaterial(0);              //emerald
-    glPushMatrix();
-    glTranslatef((padX1 + padX2)/2.0, (padY1 + padY2)/2.0, 0);
-    glScaled(1.0, 0.1, 0.8);
-    glutSolidCube(0.3);
-    glPopMatrix();
+    
+    glBegin(GL_QUADS);
+    glVertex2f(padX1, padY1);
+    glVertex2f(padX1, padY2);
+    glVertex2f(padX2, padY2);
+    glVertex2f(padX2, padY1);
+    glEnd();
     
     // Draw blocks
     drawBlocks();
@@ -403,7 +405,7 @@ void updateBallPosition()
 
 
 bool gameOver() {
-    state = 1;
+    
     
     return false;
 }
@@ -412,29 +414,8 @@ bool gameOver() {
 
 void restartRound()
 {
-    xDir = 1;
-    yDir = -1;
-    xChange = 0.0;
-    yChange = 0.01;
-    timeRedraw = 8;
     
-    ballX1 = -0.05;
-    ballX2 = +0.05;
-    ballY1 = -0.05;
-    ballY2 = +0.05;
-    radius = 0.03;
-    
-    posXBall = 0.0;
-    posYBall = 0.0;
-    
-    padY1 = -1.00;
-    padY2 = -0.95;
-    padX1 = -0.15;
-    padX2 = +0.15;
-    
-    state = 0;
-    
-    generateRandomBlockLevelSymmetrical(10);
+    generateRandomBlockLevel(10);
 }
 
 
@@ -504,10 +485,6 @@ void myKeyboard(unsigned char theKey, int mouseX, int mouseY)
             if (timeRedraw <= 0) {
                 timeRedraw = 0;
             }
-            break;
-            
-        case 'r':
-            restartRound();
             break;
             
         case 27:
