@@ -222,6 +222,7 @@
 				9665DD95170AA5B5000AFE25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
