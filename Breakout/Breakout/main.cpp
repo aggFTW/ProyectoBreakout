@@ -17,7 +17,8 @@
 
 using namespace std;
 
-int	screenWidth = 640, screenHeight = 640;
+int	screenWidth = 740, screenHeight = 640;
+double topbar = 1.15625;
 
 int xDir = 1;
 int yDir = -1;
@@ -38,6 +39,9 @@ double padY1 = -1.00;
 double padY2 = -0.95;
 double padX1 = -0.15;
 double padX2 = +0.15;
+
+int score = 0;
+int lives = 5;
 
 // 0 for playing, 1 for game over
 int state = 0;
@@ -131,6 +135,17 @@ float mat_ambient[] = {0.7f, 0.7f, 0.7f, 1.0f};
 float mat_diffuse[] = {0.6f, 0.6f, 0.6f, 1.0f};
 float mat_specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
 GLfloat mat_shininess[]= {100.0f};
+
+
+
+//string convertInt(int number)
+//{
+//    stringstream ss;
+//    ss << number;
+//    return ss.str();
+//}
+
+
 
 // 0  "emerald"
 // 1  "jade"
@@ -310,27 +325,37 @@ static void drawBlocks()
 
 void reshape(int x, int y)
 {
+    screenWidth = x;
+    screenHeight = y;
+    
     // Camera
     glViewport(0, 0, x, y);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     double winHt = 1.0;
-    glOrtho(-winHt, winHt, -winHt, winHt, -winHt, winHt);
+    glOrtho(-winHt, winHt, -winHt, topbar, -winHt, winHt);
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(0, 0.1, 0.4, 0, 0, 0, 0, 1, 0);
 }
 
-static void display(void)
+static void drawText(char * string, double x, double y, double z)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    // Lights
-    GLfloat lightIntensity[] = {0.7f, 0.7f, 0.7f, 1.0f};
-    GLfloat light_position[] = {2.0f, 2.0f, 3.0f, 0.0f};
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity);
-    
+    char *c;
+    glPushMatrix();
+    glTranslated(x, y, z);
+    for (c=string; *c != '\0'; c++)
+    {
+        glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN , *c);
+    }
+    glPopMatrix();
+}
+
+static void displayGame()
+{
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
     
     // Draw left paddle
     changeMaterial(0);              //emerald
@@ -350,6 +375,75 @@ static void display(void)
     glutSolidSphere(radius, 30, 30);
     glPopMatrix();
     
+    // Draw top bar
+    changeMaterial(11);              //silver
+    glPushMatrix();
+    glTranslatef(0, (topbar + 1.0) / 2, -0.2);
+    glScaled(25.0, 2.0, 1.0);
+    glutSolidCube(0.095);
+    glPopMatrix();
+    
+    // Display score
+    char msg[250] = {};
+    glColor3f(1.0, 1.0, 1.0);
+    std::string f_str = "Score: " + std::to_string(score);
+    char * ss = const_cast<char*> (f_str.c_str());
+//    changeMaterial(3);              //pearl
+//    drawText(ss, -0.95, 1.1, 0.7);
+    sprintf(msg, "%s", ss);
+    glRasterPos2f(-0.95f, 1.1f);
+    for (int k=0; k<34; k++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg[k]);
+    
+    // Display lives
+    char msg2[250] = {};
+    glColor3f(1.0, 1.0, 1.0);
+    f_str = "Lives: " + std::to_string(lives);
+    ss = const_cast<char*> (f_str.c_str());
+    //    changeMaterial(3);              //pearl
+    //    drawText(ss, -0.95, 1.1, 0.7);
+    sprintf(msg2, "%s", ss);
+    glRasterPos2f(0.75f, 1.1f);
+    for (int k=0; k<34; k++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg2[k]);
+
+}
+
+static void displayGameOver()
+{
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+    
+    glColor3f(0.0, 0.0, 0.0);
+    char msg[9];
+    sprintf(msg, "%s", "GAMEOVER");
+    glColor3f(1.0, 0.0, 1.0);
+    glRasterPos2f(-0.13f, 0.0f);
+    for (int k=0; k<8; k++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg[k]);
+}
+
+static void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    // Lights
+    GLfloat lightIntensity[] = {0.7f, 0.7f, 0.7f, 1.0f};
+    GLfloat light_position[] = {2.0f, 2.0f, 3.0f, 0.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity);
+    
+    switch (state) {
+        case 0:
+            displayGame();
+            break;
+        case 1:
+            displayGameOver();
+            break;
+        default:
+            break;
+    }
+    
     glutSwapBuffers();
 }
 
@@ -364,6 +458,88 @@ bool checkBallCollisionWithPad()
         return true;
     }
     return false;
+}
+
+void printBlockCollision(int from, int i, int j, double x, double y)
+{
+    cout << "from: " << from << "\n---------------------------\n";
+    cout << "x: " << x << "\n";
+    cout << "y: " << y << "\n";
+    cout << "posXBall: " << posXBall << "\n";
+    cout << "posYBall: " << posYBall << "\n";
+    cout << "i: " << i << "\n";
+    cout << "j: " << j << "\n";
+}
+
+void scoreBlock(int type)
+{
+    switch (type) {
+        case 1:
+            score += 1;
+            break;
+        case 2:
+            score += 2;
+            break;
+        case 3:
+            score += 3;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+void checkBallCollisionWithBlocks()
+{
+    double x = -1.0;
+    double y = 0.9;
+    int type = 0;
+    
+    for (int i = 0; i < 20; i++) {
+        x = -1.0;
+        
+        for (int j = 0; j < 20; j++) {
+            // get type of square
+            type = blockLevel[i][j];
+            
+            // check for collision when appropiate
+            if (type != 0) {
+                // Center block:    x + 0.05, y + 0.05
+                // Center ball:     posXBall, posYBall === radius
+                
+                // Top and bottom - if x center ball in block x range
+                if (posXBall < x + 0.1 && posXBall > x)
+                {
+                    if ((posYBall - radius <= y + 0.1 && posYBall - radius >= y + 0.9) ||
+                        (posYBall + radius >= y && posYBall + radius <= y + 0.1))
+                    {
+                        yDir *= -1;
+                        blockLevel[i][j] = 0;
+                        scoreBlock(type);
+//                        printBlockCollision(1, i, j, x, y);
+                    }
+                }
+                
+                // Left and right - if y center ball in block y range
+                if (posYBall < y + 0.1 && posYBall > y)
+                {
+                    if ((posXBall - radius <= x + 0.1 && posXBall - radius >= x + 0.9) ||
+                        (posXBall + radius >= x && posXBall + radius <= x + 0.1))
+                    {
+                        xDir *= -1;
+                        blockLevel[i][j] = 0;
+                        scoreBlock(type);
+//                        printBlockCollision(2, i, j, x, y);
+                    }
+                }
+            }
+            
+            // update x
+            x += 0.1;
+        }
+        
+        y -= 0.1;
+    }
 }
 
 
@@ -389,13 +565,6 @@ void updateBallPosition()
 }
 
 
-bool gameOver() {
-    
-    
-    return false;
-}
-
-
 
 void restartRound()
 {
@@ -418,6 +587,8 @@ void restartRound()
     padY2 = -0.95;
     padX1 = -0.15;
     padX2 = +0.15;
+    
+    score = 0;
     
     state = 0;
     
@@ -445,7 +616,20 @@ void myTimer(int value)
         
         updateBallPosition();
         
+        checkBallCollisionWithBlocks();
         
+        if (ballY1 < -1.0) {
+            lives = lives - 1;
+            if (lives <= 0)
+            {
+                state = 1;
+            }
+            else
+            {
+                restartRound();
+            }
+            
+        }
     }
     
     glutPostRedisplay();
@@ -507,9 +691,30 @@ void myKeyboard(unsigned char theKey, int mouseX, int mouseY)
 
 
 
+void mouse(int x, int y)
+{    
+    double pos = ((double) x - screenWidth / 2.0) / (screenWidth / 2.0);
+    
+    padX1 = pos - 0.15;
+    padX2 = pos + 0.15;
+    
+    if (padX2 >= 1) {
+        padX2 = 1;
+        padX1 = 0.7;
+    }
+    
+    if (padX1 <= -1) {
+        padX2 = -0.7;
+        padX1 = -1.0;
+    }
+    
+    glutPostRedisplay();
+}
+
+
+
 void init()
 {
-    //gluOrtho2D(-1, 1, -1, 1);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
@@ -518,6 +723,7 @@ void init()
     
     generateRandomBlockLevelSymmetrical(10);
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -530,6 +736,8 @@ int main(int argc, char *argv[])
     
     
     glutKeyboardFunc(myKeyboard);
+//    glutMouseFunc(mouse);
+    glutPassiveMotionFunc(mouse);
     glutDisplayFunc(display);
     glutTimerFunc(timeRedraw, myTimer, 1);
     glutReshapeFunc(reshape );
