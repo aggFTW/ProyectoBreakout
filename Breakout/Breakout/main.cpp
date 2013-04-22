@@ -24,7 +24,11 @@ int xDir = 1;
 int yDir = -1;
 double xChange = 0.0;
 double yChange = 0.01;
+
+double angle = 0.0;
+
 double timeRedraw = 8;
+double timePlaying = 0;
 
 double ballX1 = -0.05;
 double ballX2 = +0.05;
@@ -49,6 +53,15 @@ int state = 0;
 int blockLevel[20][20] = {0};
 
 
+struct bonus {
+    int i;
+    int j;
+    double timeLeft;
+    int type;
+} ;
+
+bonus bonuses[5] = {};
+int bonusIndex = 0;
 
 
 
@@ -147,6 +160,63 @@ GLfloat mat_shininess[]= {100.0f};
 
 
 
+bool checkBonusTimeLeft()
+{
+    for (int i = 0; i < 5; i++) {
+        if (bonuses[i].timeLeft > 0) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+
+
+// This method should be called checking that the bonus can be substituted
+// by calling checkBonusTimeLeft()
+//      (only 5 bonuses are possible at any time)
+void createBonusCoin(int i, int j)
+{
+    blockLevel[i][j] = 7;
+    
+    bonuses[bonusIndex].i = i;
+    bonuses[bonusIndex].j = j;
+    bonuses[bonusIndex].timeLeft = 4500;
+    bonuses[bonusIndex].type = 7;
+    
+    bonusIndex = (bonusIndex + 1) % 5;
+}
+
+
+
+void decreaseBonusTime()
+{
+    for (int i = 0; i < 5; i++) {
+        if (bonuses[i].timeLeft > 0) {
+            
+            bonuses[i].timeLeft -= timeRedraw;
+            
+            if (bonuses[i].timeLeft < 0) {
+                
+                //cout << "Quitar moneda en " << bonuses[i].i << "y" << bonuses[i].j << "\n";
+                
+                blockLevel[bonuses[i].i][bonuses[i].j] = 0;
+                
+                bonuses[i].i = 0;
+                bonuses[i].j = 0;
+                bonuses[i].timeLeft = 0;
+                bonuses[i].type = 0;
+            }
+        }
+    }
+}
+
+
+
+
+
+
 // 0  "emerald"
 // 1  "jade"
 // 2  "obsidian"
@@ -179,6 +249,18 @@ void changeMaterial(int i)
     glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 void printBlockLevelMatrix()
 {
     for (int i = 0; i < 20; i++) {
@@ -198,14 +280,30 @@ void printBlockLevelMatrix()
  *      1 - blue block
  *      2 - red block
  *      3 - yellow block
+ *      4 - white, 1 hit block
+ *      5 - gray, 2 hit block
+ *      6 - black, 3 hit block
+ *      7 - coin
  */
+
+int randomBlock()
+{
+    int b;
+    
+    do {
+        b = rand() % 7;
+    } while (b == 4 || b == 5 || b == 6);
+    
+    return b;
+}
+
 static void generateRandomBlockLevel(int numberRows)
 {
     srand ((unsigned) time(NULL));
     
     for (int i = 0; i < numberRows; i++) {
         for (int j = 0; j < 20; j++) {
-            blockLevel[i][j] = rand() % 4;
+            blockLevel[i][j] = randomBlock();
         }
     }
     
@@ -222,8 +320,42 @@ static void generateRandomBlockLevelSymmetrical(int numberRows)
     
     for (int i = 0; i < numberRows; i++) {
         for (int j = 0; j < 10; j++) {
-            blockLevel[i][j] = rand() % 4;
+            blockLevel[i][j] = randomBlock();
             blockLevel[i][19-j] = blockLevel[i][j];
+            
+            // cout << i << "," << j << " and " << i << "," << 19-j << "\n";
+        }
+    }
+    
+    for (int i = numberRows; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
+            blockLevel[i][j] = 0;
+        }
+    }
+    
+    // printBlockLevelMatrix();
+}
+
+
+static void generateRandomBlockLevelSymmetricalWithBarriers20(int numberRows)
+{
+    srand ((unsigned) time(NULL));
+    
+    for (int i = 0; i < numberRows; i++) {
+        bool rowBlock = false;
+        
+        if (rand() % 5 > 3) {
+            rowBlock = true;
+        }
+        
+        for (int j = 0; j < 10; j++) {
+            if (rowBlock) {
+                blockLevel[i][j] = 6;
+                blockLevel[i][19-j] = 6;
+            } else {
+                blockLevel[i][j] = randomBlock();
+                blockLevel[i][19-j] = blockLevel[i][j];
+            }
             
             // cout << i << "," << j << " and " << i << "," << 19-j << "\n";
         }
@@ -270,9 +402,55 @@ void drawYellowCube(double x, double y)
 {
     glPushMatrix();
     
-    changeMaterial(10);             //gold
+    changeMaterial(17);             //yellow plastic
     glTranslated(x + 0.05, y + 0.05, 0);
     glutSolidCube(0.095);
+    
+    glPopMatrix();
+}
+
+void drawWhiteHitCube(double x, double y)
+{
+    glPushMatrix();
+    
+    changeMaterial(3);             //pearl
+    glTranslated(x + 0.05, y + 0.05, 0);
+    glutSolidCube(0.095);
+    
+    glPopMatrix();
+}
+
+void drawGrayHitCube(double x, double y)
+{
+    glPushMatrix();
+    
+    changeMaterial(8);             //chrome
+    glTranslated(x + 0.05, y + 0.05, 0);
+    glutSolidCube(0.095);
+    
+    glPopMatrix();
+}
+
+void drawBlackHitCube(double x, double y)
+{
+    glPushMatrix();
+    
+    changeMaterial(2);             //obsidian
+    glTranslated(x + 0.05, y + 0.05, 0);
+    glutSolidCube(0.095);
+    
+    glPopMatrix();
+}
+
+void drawBonusCoin(double x, double y)
+{   
+    glPushMatrix();
+    
+    changeMaterial(10);             //gold
+    glTranslated(x + 0.05, y + 0.05, 0);
+    glRotated(angle, 0.0, 1.0, 0.0);
+    glScalef(1.0, 1.0, 0.15);
+    glutSolidSphere(0.04, 20, 20);
     
     glPopMatrix();
 }
@@ -283,6 +461,10 @@ void drawYellowCube(double x, double y)
  *      1 - blue block
  *      2 - red block
  *      3 - yellow block
+ *      4 - white, 1 hit block
+ *      5 - gray, 2 hit block
+ *      6 - black, 3 hit block
+ *      7 - coin
  */
 static void drawBlocks()
 {
@@ -309,6 +491,18 @@ static void drawBlocks()
                     break;
                 case 3:
                     drawYellowCube(x, y);
+                    break;
+                case 4:
+                    drawWhiteHitCube(x, y);
+                    break;
+                case 5:
+                    drawGrayHitCube(x, y);
+                    break;
+                case 6:
+                    drawBlackHitCube(x, y);
+                    break;
+                case 7:
+                    drawBonusCoin(x, y);
                     break;
                 default:
                     break;
@@ -353,9 +547,7 @@ static void drawText(char * string, double x, double y, double z)
 }
 
 static void displayGame()
-{
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+{ 
     
     // Draw left paddle
     changeMaterial(0);              //emerald
@@ -365,8 +557,14 @@ static void displayGame()
     glutSolidCube(0.3);
     glPopMatrix();
     
+    
+    
+    
     // Draw blocks
     drawBlocks();
+    
+    
+    
     
     // Draw ball
     changeMaterial(3);              //pearl
@@ -375,6 +573,9 @@ static void displayGame()
     glutSolidSphere(radius, 30, 30);
     glPopMatrix();
     
+    
+    
+    
     // Draw top bar
     changeMaterial(11);              //silver
     glPushMatrix();
@@ -382,6 +583,9 @@ static void displayGame()
     glScaled(25.0, 2.0, 1.0);
     glutSolidCube(0.095);
     glPopMatrix();
+    
+    
+    
     
     // Display score
     char msg[250] = {};
@@ -394,6 +598,9 @@ static void displayGame()
     glRasterPos2f(-0.95f, 1.1f);
     for (int k=0; k<34; k++)
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg[k]);
+    
+    
+    
     
     // Display lives
     char msg2[250] = {};
@@ -423,6 +630,24 @@ static void displayGameOver()
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg[k]);
 }
 
+static void displayGamePaused()
+{
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+    
+    glColor3f(1.0, 1.0, 1.0);
+    displayGame();
+    
+    // Display paused overlay
+    glColor3f(1.0, 1.0, 1.0);
+    char msg[7];
+    sprintf(msg, "%s", "PAUSED");
+    glRasterPos2f(-0.09f, -0.2f);
+    for (int k=0; k<6; k++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, msg[k]);
+        
+}
+
 static void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -435,10 +660,15 @@ static void display(void)
     
     switch (state) {
         case 0:
+            glEnable(GL_LIGHTING);
+            glEnable(GL_LIGHT0);
             displayGame();
             break;
         case 1:
             displayGameOver();
+            break;
+        case 2:
+            displayGamePaused();
             break;
         default:
             break;
@@ -446,6 +676,17 @@ static void display(void)
     
     glutSwapBuffers();
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -471,7 +712,7 @@ void printBlockCollision(int from, int i, int j, double x, double y)
     cout << "j: " << j << "\n";
 }
 
-void scoreBlock(int type)
+void scoreBlock(int type, int i, int j)
 {
     switch (type) {
         case 1:
@@ -482,6 +723,18 @@ void scoreBlock(int type)
             break;
         case 3:
             score += 3;
+            break;
+        case 4:
+            score += 5;
+            break;
+        case 5:
+            blockLevel[i][j] = 4;
+            break;
+        case 6:
+            blockLevel[i][j] = 5;
+            break;
+        case 7:
+            score += 50;
             break;
             
         default:
@@ -515,7 +768,7 @@ void checkBallCollisionWithBlocks()
                     {
                         yDir *= -1;
                         blockLevel[i][j] = 0;
-                        scoreBlock(type);
+                        scoreBlock(type, i, j);
 //                        printBlockCollision(1, i, j, x, y);
                     }
                 }
@@ -528,7 +781,7 @@ void checkBallCollisionWithBlocks()
                     {
                         xDir *= -1;
                         blockLevel[i][j] = 0;
-                        scoreBlock(type);
+                        scoreBlock(type, i, j);
 //                        printBlockCollision(2, i, j, x, y);
                     }
                 }
@@ -592,14 +845,20 @@ void restartRound()
     
     state = 0;
     
-    generateRandomBlockLevelSymmetrical(10);
+    timePlaying = 0;
+    
+    generateRandomBlockLevelSymmetricalWithBarriers20(10);
 }
 
 
 
 void myTimer(int value)
 {
+    angle += 0.5;
+    
     if (state == 0) {
+        
+        timePlaying += timeRedraw;
         
         // Do checkBallCollision with pad
         if ( checkBallCollisionWithPad() ) {
@@ -630,6 +889,16 @@ void myTimer(int value)
             }
             
         }
+        
+        decreaseBonusTime();
+        
+        if (rand() % 10000 > 9990 && checkBonusTimeLeft()) {
+            int i = rand() % 10;
+            int j = rand() % 20;
+            createBonusCoin(i, j);
+        }
+        
+        
     }
     
     glutPostRedisplay();
@@ -647,23 +916,27 @@ void myKeyboard(unsigned char theKey, int mouseX, int mouseY)
     {
         case 'd':
         case 'D':
-            padX1 += padXmov;
-            padX2 += padXmov;
-            
-            if (padX2 >= 1) {
-                padX2 = 1;
-                padX1 = 0.7;
+            if (state == 0) {
+                padX1 += padXmov;
+                padX2 += padXmov;
+                
+                if (padX2 >= 1) {
+                    padX2 = 1;
+                    padX1 = 0.7;
+                }
             }
             break;
             
         case 'a':
         case 'A':
-            padX1 -= padXmov;
-            padX2 -= padXmov;
-            
-            if (padX1 <= -1) {
-                padX2 = -0.7;
-                padX1 = -1.0;
+            if (state == 0) {
+                padX1 -= padXmov;
+                padX2 -= padXmov;
+                
+                if (padX1 <= -1) {
+                    padX2 = -0.7;
+                    padX1 = -1.0;
+                }
             }
             break;
             
@@ -675,6 +948,16 @@ void myKeyboard(unsigned char theKey, int mouseX, int mouseY)
             if (timeRedraw <= 0) {
                 timeRedraw = 0;
             }
+            break;
+            
+        case 'p':
+        case 'P':
+            if (state == 0) {
+                state = 2;
+            } else if (state == 2) {
+                state = 0;
+            }
+            
             break;
             
         case 'r':
@@ -692,23 +975,64 @@ void myKeyboard(unsigned char theKey, int mouseX, int mouseY)
 
 
 void mouse(int x, int y)
-{    
-    double pos = ((double) x - screenWidth / 2.0) / (screenWidth / 2.0);
-    
-    padX1 = pos - 0.15;
-    padX2 = pos + 0.15;
-    
-    if (padX2 >= 1) {
-        padX2 = 1;
-        padX1 = 0.7;
-    }
-    
-    if (padX1 <= -1) {
-        padX2 = -0.7;
-        padX1 = -1.0;
+{
+    if (state == 0) {
+        double pos = ((double) x - screenWidth / 2.0) / (screenWidth / 2.0);
+        
+        padX1 = pos - 0.15;
+        padX2 = pos + 0.15;
+        
+        if (padX2 >= 1) {
+            padX2 = 1;
+            padX1 = 0.7;
+        }
+        
+        if (padX1 <= -1) {
+            padX2 = -0.7;
+            padX1 = -1.0;
+        }
     }
     
     glutPostRedisplay();
+}
+
+void processMenu(int val){
+    
+    switch (val) {
+        case 10:
+            restartRound();
+            break;
+        case 20:
+            if (state == 0) {
+                state = 2;
+            } else if (state == 2) {
+                state = 0;
+            }
+            break;
+        case 30:
+            exit(1);
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+void addMenues(){
+	int mainMenu, subMenu1, subMenu2, subMenu3;
+    
+	mainMenu = glutCreateMenu(processMenu);
+	subMenu1 = glutCreateMenu(processMenu);
+	subMenu2 = glutCreateMenu(processMenu);
+	subMenu3 = glutCreateMenu(processMenu);
+    
+    glutSetMenu(mainMenu);
+    glutAddMenuEntry("Restart Level", 10);
+    glutAddMenuEntry("Pause", 20);
+	glutAddMenuEntry("Quit", 30);
+	
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 
@@ -721,7 +1045,14 @@ void init()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
     
-    generateRandomBlockLevelSymmetrical(10);
+    generateRandomBlockLevelSymmetricalWithBarriers20(10);
+    
+    for (int i = 0; i < 5; i++) {
+        bonuses[i].i = 0;
+        bonuses[i].j = 0;
+        bonuses[i].timeLeft = 0;
+        bonuses[i].type = 0;
+    }
 }
 
 
@@ -744,6 +1075,7 @@ int main(int argc, char *argv[])
     //srand ((unsigned) time(NULL));
     
     init();
+    addMenues();
     
     glutMainLoop();
     
