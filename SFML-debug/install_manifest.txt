@@ -1,0 +1,202 @@
+/Library/Frameworks/SFML.framework/Headers
+/Library/Frameworks/SFML.framework/Resources
+/Library/Frameworks/SFML.framework/SFML
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/Export.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/Listener.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/Music.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/Sound.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/SoundBuffer.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/SoundBufferRecorder.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/SoundRecorder.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/SoundSource.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio/SoundStream.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Audio.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Config.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/BlendMode.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/CircleShape.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Color.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/ConvexShape.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Drawable.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Export.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Font.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Glyph.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Image.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/PrimitiveType.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Rect.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Rect.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/RectangleShape.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/RenderStates.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/RenderTarget.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/RenderTexture.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/RenderWindow.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Shader.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Shape.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Sprite.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Text.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Texture.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Transform.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Transformable.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/Vertex.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/VertexArray.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics/View.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Graphics.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/Export.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/Ftp.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/Http.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/IpAddress.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/Packet.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/Socket.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/SocketHandle.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/SocketSelector.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/TcpListener.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/TcpSocket.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network/UdpSocket.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Network.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/OpenGL.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Clock.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Err.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Export.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/InputStream.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Lock.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Mutex.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/NonCopyable.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Sleep.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/String.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Thread.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Thread.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/ThreadLocal.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/ThreadLocalPtr.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/ThreadLocalPtr.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Time.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Utf.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Utf.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Vector2.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Vector2.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Vector3.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System/Vector3.inl
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/System.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Context.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/ContextSettings.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Event.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Export.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/GlResource.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Joystick.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Keyboard.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Mouse.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/VideoMode.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/Window.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/WindowHandle.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window/WindowStyle.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Headers/Window.hpp
+/Library/Frameworks/SFML.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/SFML.framework/Versions/2.0.0/SFML
+/Library/Frameworks/SFML.framework/Versions/Current
+/usr/local/share/SFML/cmake/Modules/FindSFML.cmake
+/usr/local/share/SFML/license.txt
+/usr/local/share/SFML/readme.txt
+/Library/Frameworks/sndfile.framework/Resources
+/Library/Frameworks/sndfile.framework/sndfile
+/Library/Frameworks/sndfile.framework/Versions/A/Resources/Info.plist
+/Library/Frameworks/sndfile.framework/Versions/A/sndfile
+/Library/Frameworks/sndfile.framework/Versions/Current
+/Library/Frameworks/freetype.framework/freetype
+/Library/Frameworks/freetype.framework/Resources
+/Library/Frameworks/freetype.framework/Versions/A/freetype
+/Library/Frameworks/freetype.framework/Versions/A/Resources/Info.plist
+/Library/Frameworks/freetype.framework/Versions/Current
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/cute_image.jpg
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/icon.png
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/main.cpp
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/nice_music.ogg
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/ResourcePath.hpp
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/ResourcePath.mm
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/sansation.ttf
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/TemplateIcon.icns
+/Library/Developer/Xcode/Templates/SFML/SFML App.xctemplate/TemplateInfo.plist
+/Library/Developer/Xcode/Templates/SFML/SFML Base.xctemplate/TemplateInfo.plist
+/Library/Developer/Xcode/Templates/SFML/SFML Bundle.xctemplate/TemplateInfo.plist
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/cute_image.jpg
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/icon.png
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/main.cpp
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/nice_music.ogg
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/sansation.ttf
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/TemplateIcon.icns
+/Library/Developer/Xcode/Templates/SFML/SFML CLT.xctemplate/TemplateInfo.plist
+/Library/Developer/Xcode/Templates/SFML/SFML Compiler.xctemplate/TemplateInfo.plist
+/Library/Developer/Xcode/Templates/SFML/SFML Linker.xctemplate/TemplateInfo.plist
+/Library/Frameworks/sfml-system.framework/Resources
+/Library/Frameworks/sfml-system.framework/sfml-system
+/Library/Frameworks/sfml-system.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/sfml-system.framework/Versions/2.0.0/sfml-system
+/Library/Frameworks/sfml-system.framework/Versions/Current
+/Library/Frameworks/sfml-window.framework/Resources
+/Library/Frameworks/sfml-window.framework/sfml-window
+/Library/Frameworks/sfml-window.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/sfml-window.framework/Versions/2.0.0/sfml-window
+/Library/Frameworks/sfml-window.framework/Versions/Current
+/Library/Frameworks/sfml-network.framework/Resources
+/Library/Frameworks/sfml-network.framework/sfml-network
+/Library/Frameworks/sfml-network.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/sfml-network.framework/Versions/2.0.0/sfml-network
+/Library/Frameworks/sfml-network.framework/Versions/Current
+/Library/Frameworks/sfml-graphics.framework/Resources
+/Library/Frameworks/sfml-graphics.framework/sfml-graphics
+/Library/Frameworks/sfml-graphics.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/sfml-graphics.framework/Versions/2.0.0/sfml-graphics
+/Library/Frameworks/sfml-graphics.framework/Versions/Current
+/Library/Frameworks/sfml-audio.framework/Resources
+/Library/Frameworks/sfml-audio.framework/sfml-audio
+/Library/Frameworks/sfml-audio.framework/Versions/2.0.0/Resources/Info.plist
+/Library/Frameworks/sfml-audio.framework/Versions/2.0.0/sfml-audio
+/Library/Frameworks/sfml-audio.framework/Versions/Current
+/usr/local/share/SFML/examples/ftp/ftp
+/usr/local/share/SFML/examples/ftp/Ftp.cpp
+/usr/local/share/SFML/examples/opengl/opengl
+/usr/local/share/SFML/examples/opengl/OpenGL.cpp
+/usr/local/share/SFML/examples/opengl/resources/background.jpg
+/usr/local/share/SFML/examples/opengl/resources/sansation.ttf
+/usr/local/share/SFML/examples/opengl/resources/texture.jpg
+/usr/local/share/SFML/examples/pong/pong
+/usr/local/share/SFML/examples/pong/Pong.cpp
+/usr/local/share/SFML/examples/pong/resources/ball.wav
+/usr/local/share/SFML/examples/pong/resources/sansation.ttf
+/usr/local/share/SFML/examples/shader/shader
+/usr/local/share/SFML/examples/shader/Effect.hpp
+/usr/local/share/SFML/examples/shader/Shader.cpp
+/usr/local/share/SFML/examples/shader/resources/background.jpg
+/usr/local/share/SFML/examples/shader/resources/blink.frag
+/usr/local/share/SFML/examples/shader/resources/blur.frag
+/usr/local/share/SFML/examples/shader/resources/devices.png
+/usr/local/share/SFML/examples/shader/resources/edge.frag
+/usr/local/share/SFML/examples/shader/resources/pixelate.frag
+/usr/local/share/SFML/examples/shader/resources/sansation.ttf
+/usr/local/share/SFML/examples/shader/resources/sfml.png
+/usr/local/share/SFML/examples/shader/resources/storm.vert
+/usr/local/share/SFML/examples/shader/resources/text-background.png
+/usr/local/share/SFML/examples/shader/resources/wave.vert
+/usr/local/share/SFML/examples/sockets/sockets
+/usr/local/share/SFML/examples/sockets/Sockets.cpp
+/usr/local/share/SFML/examples/sockets/TCP.cpp
+/usr/local/share/SFML/examples/sockets/UDP.cpp
+/usr/local/share/SFML/examples/sound/sound
+/usr/local/share/SFML/examples/sound/Sound.cpp
+/usr/local/share/SFML/examples/sound/resources/canary.wav
+/usr/local/share/SFML/examples/sound/resources/orchestral.ogg
+/usr/local/share/SFML/examples/sound-capture/sound-capture
+/usr/local/share/SFML/examples/sound-capture/SoundCapture.cpp
+/usr/local/share/SFML/examples/voip/voip
+/usr/local/share/SFML/examples/voip/VoIP.cpp
+/usr/local/share/SFML/examples/voip/Client.cpp
+/usr/local/share/SFML/examples/voip/Server.cpp
+/usr/local/share/SFML/examples/window/window
+/usr/local/share/SFML/examples/window/Window.cpp
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Info.plist
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/MacOS/cocoa
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/blue.png
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/Credits.rtf
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/green.png
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/icon.icns
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/logo.png
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/MainMenu.nib
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/red.png
+/usr/local/share/SFML/examples/cocoa/cocoa.app/Contents/Resources/sansation.ttf
