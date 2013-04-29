@@ -1,1 +1,0 @@
-/usr/bin/c++  -stdlib=libc++ -O3 -DNDEBUG -arch i386 -arch x86_64 -dynamiclib -Wl,-headerpad_max_install_names  -o SFML.framework/Versions/2.0.0/SFML -install_name @executable_path/../Frameworks/SFML.framework/Versions/2.0.0/SFML CMakeFiles/SFML.dir/dummy.cpp.o 
