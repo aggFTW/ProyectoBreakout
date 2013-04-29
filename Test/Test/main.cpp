@@ -770,6 +770,7 @@ void scoreBlock(int type, int i, int j)
             blockLevel[i][j] = 5;
             break;
         case 7:
+            blockLevel[i][j] = 0;
             score += 50;
             break;
             
